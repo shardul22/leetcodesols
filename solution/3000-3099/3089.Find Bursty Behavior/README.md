@@ -1,12 +1,20 @@
-# [3089. 查找突发行为](https://leetcode.cn/problems/find-bursty-behavior)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/3000-3099/3089.Find%20Bursty%20Behavior/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [3089. 查找突发行为 🔒](https://leetcode.cn/problems/find-bursty-behavior)
 
 [English Version](/solution/3000-3099/3089.Find%20Bursty%20Behavior/README_EN.md)
 
-<!-- tags:数据库 -->
-
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：<code>Posts</code></p>
 
@@ -22,7 +30,7 @@ post_id 是这张表的主键（有不同值的列）。
 这张表的每一行包含 post_id，user_id 和 post_date。
 </pre>
 
-<p>编写一个解决方案来找到在 <code>2024</code> 年 2 月期间在发布模式中表现出 <strong>突发行为</strong> 的用户。<strong>突发行为</strong>&nbsp;指用户在&nbsp;<code>2024</code> 年 2 月 <strong>任何</strong> <strong>连续 7 天</strong> 的时段中发帖频率是其 <strong>平均</strong> 每周发帖频率的 <strong>至少两倍</strong>。</p>
+<p>编写一个解决方案来找到在 <code>2024</code> 年 2 月期间在发帖行为中表现出 <strong>突发行为</strong> 的用户。<strong>突发行为</strong>&nbsp;指用户在&nbsp;<code>2024</code> 年 2 月 <strong>存在一个</strong> <strong>连续 7 天</strong> 的时段中发帖频率是其 <strong>平均</strong> 每周发帖频率的 <strong>至少两倍</strong>。</p>
 
 <p><strong>注意：</strong>&nbsp;在你的统计中只包含 2 月 <code>1</code> 日 到 2 月 <code>28</code> 日，也就是说你应该把 2 月记为正好 <code>4</code> 周。</p>
 
@@ -76,7 +84,11 @@ post_id 是这张表的主键（有不同值的列）。
 <p><b>注意：</b>&nbsp;输出表以 user_id 升序排序。</p>
 </div>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：自连接 + 分组统计
 
@@ -87,6 +99,8 @@ post_id 是这张表的主键（有不同值的列）。
 最后，我们将表 `P` 和表 `T` 连接，连接条件是 `P.user_id = T.user_id`，然后按照 `user_id` 分组，统计出每个用户在 7 天内的最大发帖数量，最后筛选出满足条件 `max_7day_posts >= avg_weekly_posts * 2` 的记录，即可得到结果。注意，我们需要按照 `user_id` 升序排序。
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -114,6 +128,8 @@ GROUP BY 1
 HAVING max_7day_posts >= avg_weekly_posts * 2
 ORDER BY 1;
 ```
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -165,4 +181,6 @@ def find_bursty_behavior(posts: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

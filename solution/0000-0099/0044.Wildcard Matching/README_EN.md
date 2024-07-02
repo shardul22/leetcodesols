@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0044.Wildcard%20Matching/README_EN.md
+tags:
+    - Greedy
+    - Recursion
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching)
 
 [中文文档](/solution/0000-0099/0044.Wildcard%20Matching/README.md)
 
-<!-- tags:Greedy,Recursion,String,Dynamic Programming -->
-
 ## Description
+
+<!-- description:start -->
 
 <p>Given an input string (<code>s</code>) and a pattern (<code>p</code>), implement wildcard pattern matching with support for <code>&#39;?&#39;</code> and <code>&#39;*&#39;</code> where:</p>
 
@@ -49,7 +62,11 @@
 	<li><code>p</code> contains only lowercase English letters, <code>&#39;?&#39;</code> or <code>&#39;*&#39;</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Memoization Search
 
@@ -68,6 +85,8 @@ The time complexity is $O(m \times n)$, and the space complexity is $O(m \times 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
@@ -83,6 +102,8 @@ class Solution:
 
         return dfs(0, 0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -121,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -149,6 +172,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func isMatch(s string, p string) bool {
@@ -184,6 +209,8 @@ func isMatch(s string, p string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isMatch(s: string, p: string): boolean {
     const m = s.length;
@@ -211,6 +238,8 @@ function isMatch(s: string, p: string): boolean {
     return dfs(0, 0);
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -251,6 +280,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Dynamic Programming
 
 We can convert the memoization search in Solution 1 into dynamic programming.
@@ -267,6 +300,8 @@ The final answer is $f[m][n]$.
 The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the lengths of the strings $s$ and $p$, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -287,6 +322,8 @@ class Solution:
                     )
         return f[m][n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -313,6 +350,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -341,6 +380,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isMatch(s string, p string) bool {
 	m, n := len(s), len(p)
@@ -366,6 +407,8 @@ func isMatch(s string, p string) bool {
 	return f[m][n]
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isMatch(s: string, p: string): boolean {
@@ -393,6 +436,46 @@ function isMatch(s: string, p: string): boolean {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param string $s
+     * @param string $p
+     * @return boolean
+     */
+
+    function isMatch($s, $p) {
+        $lengthS = strlen($s);
+        $lengthP = strlen($p);
+        $dp = [];
+        for ($i = 0; $i <= $lengthS; $i++) {
+            $dp[$i] = array_fill(0, $lengthP + 1, false);
+        }
+        $dp[0][0] = true;
+
+        for ($i = 1; $i <= $lengthP; $i++) {
+            if ($p[$i - 1] == '*') {
+                $dp[0][$i] = $dp[0][$i - 1];
+            }
+        }
+        for ($i = 1; $i <= $lengthS; $i++) {
+            for ($j = 1; $j <= $lengthP; $j++) {
+                if ($p[$j - 1] == '?' || $s[$i - 1] == $p[$j - 1]) {
+                    $dp[$i][$j] = $dp[$i - 1][$j - 1];
+                } elseif ($p[$j - 1] == '*') {
+                    $dp[$i][$j] = $dp[$i][$j - 1] || $dp[$i - 1][$j];
+                }
+            }
+        }
+        return $dp[$lengthS][$lengthP];
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

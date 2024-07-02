@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/03.03.Stack%20of%20Plates/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [03.03. Stack of Plates](https://leetcode.cn/problems/stack-of-plates-lcci)
 
 [中文文档](/lcci/03.03.Stack%20of%20Plates/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Imagine a (literal) stack of plates. If the stack gets too high, it might topple. Therefore, in real life, we would likely start a new stack when the previous stack exceeds some threshold. Implement a data structure <code>SetOfStacks</code> that mimics this.&nbsp;<code>SetOfStacks</code> should be composed of several stacks and should create a new stack once the previous one exceeds capacity. <code>SetOfStacks.push()</code> and <code>SetOfStacks.pop()</code> should behave identically to a single stack (that is, <code>pop()</code> should return the same values as it would if there were just a single stack). Follow Up: Implement a function <code>popAt(int index)</code> which performs a pop operation on a specific sub-stack.</p>
 <p>You should delete the sub-stack when it becomes empty. <code>pop</code>, <code>popAt</code> should return -1 when there&#39;s no element to pop.</p>
@@ -37,7 +47,11 @@
 
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -50,6 +64,8 @@ We can use a list of stacks $stk$ to simulate this process, initially $stk$ is e
 The space complexity is $O(n)$, where $n$ is the number of elements.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class StackOfPlates:
@@ -82,6 +98,8 @@ class StackOfPlates:
 # param_2 = obj.pop()
 # param_3 = obj.popAt(index)
 ```
+
+#### Java
 
 ```java
 class StackOfPlates {
@@ -126,6 +144,8 @@ class StackOfPlates {
  * int param_3 = obj.popAt(index);
  */
 ```
+
+#### C++
 
 ```cpp
 class StackOfPlates {
@@ -174,6 +194,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type StackOfPlates struct {
 	stk [][]int
@@ -219,6 +241,8 @@ func (this *StackOfPlates) PopAt(index int) int {
  * param_3 := obj.PopAt(index);
  */
 ```
+
+#### TypeScript
 
 ```ts
 class StackOfPlates {
@@ -273,6 +297,55 @@ class StackOfPlates {
  */
 ```
 
+#### Swift
+
+```swift
+class StackOfPlates {
+    private var stacks: [[Int]]
+    private var cap: Int
+
+    init(_ cap: Int) {
+        self.cap = cap
+        self.stacks = []
+    }
+
+    func push(_ val: Int) {
+        if cap == 0 {
+            return
+        }
+        if stacks.isEmpty || stacks.last!.count >= cap {
+            stacks.append([])
+        }
+        stacks[stacks.count - 1].append(val)
+    }
+
+    func pop() -> Int {
+        return popAt(stacks.count - 1)
+    }
+
+    func popAt(_ index: Int) -> Int {
+        guard index >= 0, index < stacks.count, !stacks[index].isEmpty else {
+            return -1
+        }
+        let value = stacks[index].removeLast()
+        if stacks[index].isEmpty {
+            stacks.remove(at: index)
+        }
+        return value
+    }
+}
+
+/**
+ * Your StackOfPlates object will be instantiated and called as such:
+ * let obj = new StackOfPlates(cap);
+ * obj.push(val);
+ * let param_2 = obj.pop();
+ * let param_3 = obj.popAt(index);
+ */
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,12 +1,22 @@
-# [266. 回文排列](https://leetcode.cn/problems/palindrome-permutation)
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0266.Palindrome%20Permutation/README.md
+tags:
+    - 位运算
+    - 哈希表
+    - 字符串
+---
+
+<!-- problem:start -->
+
+# [266. 回文排列 🔒](https://leetcode.cn/problems/palindrome-permutation)
 
 [English Version](/solution/0200-0299/0266.Palindrome%20Permutation/README_EN.md)
 
-<!-- tags:位运算,哈希表,字符串 -->
-
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串 <code>s</code> ，如果该字符串的某个排列是 <span data-keyword="palindrome-string">回文串</span> ，则返回 <code>true</code> ；否则，返回<em> </em><code>false</code><em> </em>。</p>
 
@@ -42,7 +52,11 @@
 	<li><code>s</code> 仅由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数组
 
@@ -52,11 +66,15 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def canPermutePalindrome(self, s: str) -> bool:
         return sum(v & 1 for v in Counter(s).values()) < 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -73,6 +91,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -91,6 +111,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canPermutePalindrome(s string) bool {
 	cnt := [26]int{}
@@ -105,6 +127,8 @@ func canPermutePalindrome(s string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function canPermutePalindrome(s: string): boolean {
     const cnt: number[] = new Array(26).fill(0);
@@ -114,6 +138,8 @@ function canPermutePalindrome(s: string): boolean {
     return cnt.filter(c => c % 2 === 1).length < 2;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -131,12 +157,6 @@ var canPermutePalindrome = function (s) {
 
 <!-- tabs:end -->
 
-### 方法二：哈希表
+<!-- solution:end -->
 
-利用哈希表来维护元素。遍历字符串每个字母 $s[i]$，若 $s[i]$ 在哈希表中，则将 $s[i]$ 从哈希表中删除，否则将 $s[i]$ 加入哈希表。
-
-遍历结束，若哈希表中元素个数不超过 $1$，则返回 $true$，否则返回 $false$。
-
-时间复杂度 $O(n)$，空间复杂度 $O(|\Sigma|)$。其中 $n$ 是字符串的长度，而 $|\Sigma|$ 是字符集的大小，本题中字符集为小写字母，因此 $|\Sigma|=26$。
-
-<!-- end -->
+<!-- problem:end -->

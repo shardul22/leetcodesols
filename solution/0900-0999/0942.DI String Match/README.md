@@ -1,12 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0942.DI%20String%20Match/README.md
+tags:
+    - 贪心
+    - 数组
+    - 双指针
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [942. 增减字符串匹配](https://leetcode.cn/problems/di-string-match)
 
 [English Version](/solution/0900-0999/0942.DI%20String%20Match/README_EN.md)
 
-<!-- tags:贪心,数组,双指针,字符串 -->
-
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>由范围 <code>[0,n]</code> 内所有整数组成的 <code>n + 1</code> 个整数的排列序列可以表示为长度为 <code>n</code> 的字符串 <code>s</code> ，其中:</p>
 
@@ -48,11 +59,17 @@
 	<li><code><font color="#c7254e"><font face="Menlo, Monaco, Consolas, Courier New, monospace"><span style="font-size:12.6px"><span style="background-color:#f9f2f4">s</span></span></font></font></code> 只包含字符&nbsp;<code>"I"</code>&nbsp;或&nbsp;<code>"D"</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -70,6 +87,8 @@ class Solution:
         ans.append(low)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -89,6 +108,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +131,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func diStringMatch(s string) []int {
 	n := len(s)
@@ -129,6 +152,8 @@ func diStringMatch(s string) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function diStringMatch(s: string): number[] {
     const n = s.length;
@@ -147,6 +172,8 @@ function diStringMatch(s: string): number[] {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn di_string_match(s: String) -> Vec<i32> {
@@ -155,15 +182,13 @@ impl Solution {
         let mut res = Vec::with_capacity(n + 1);
         let (mut low, mut high) = (-1, (n + 1) as i32);
         for i in 0..n {
-            res.push(
-                if s[i] == b'I' {
-                    low += 1;
-                    low
-                } else {
-                    high -= 1;
-                    high
-                }
-            );
+            res.push(if s[i] == b'I' {
+                low += 1;
+                low
+            } else {
+                high -= 1;
+                high
+            });
         }
         res.push(low + 1);
         res
@@ -173,4 +198,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

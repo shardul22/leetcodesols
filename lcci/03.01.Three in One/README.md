@@ -1,10 +1,19 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/03.01.Three%20in%20One/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 03.01. 三合一](https://leetcode.cn/problems/three-in-one-lcci)
 
 [English Version](/lcci/03.01.Three%20in%20One/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
+
 <p>三合一。描述如何只用一个数组来实现三个栈。</p>
 
 <p>你应该实现<code>push(stackNum, value)</code>、<code>pop(stackNum)</code>、<code>isEmpty(stackNum)</code>、<code>peek(stackNum)</code>方法。<code>stackNum</code>表示栈下标，<code>value</code>表示压入的值。</p>
@@ -30,7 +39,11 @@
 [null, null, null, null, 2, 1, -1, -1]
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数组模拟
 
@@ -47,6 +60,8 @@
 时间复杂度上，每个操作的时间复杂度均为 $O(1)$。空间复杂度为 $O(\text{cap})$，其中 $\text{cap}$ 为栈的大小。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class TripleInOne:
@@ -82,6 +97,8 @@ class TripleInOne:
 # param_3 = obj.peek(stackNum)
 # param_4 = obj.isEmpty(stackNum)
 ```
+
+#### Java
 
 ```java
 class TripleInOne {
@@ -126,6 +143,8 @@ class TripleInOne {
  * boolean param_4 = obj.isEmpty(stackNum);
  */
 ```
+
+#### C++
 
 ```cpp
 class TripleInOne {
@@ -173,6 +192,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type TripleInOne struct {
 	cap int
@@ -218,6 +239,8 @@ func (this *TripleInOne) IsEmpty(stackNum int) bool {
  * param_4 := obj.IsEmpty(stackNum);
  */
 ```
+
+#### TypeScript
 
 ```ts
 class TripleInOne {
@@ -266,6 +289,57 @@ class TripleInOne {
  */
 ```
 
+#### Swift
+
+```swift
+class TripleInOne {
+    private var cap: Int
+    private var stk: [Int]
+
+    init(_ stackSize: Int) {
+        self.cap = stackSize
+        self.stk = [Int](repeating: 0, count: cap * 3 + 3)
+    }
+
+    func push(_ stackNum: Int, _ value: Int) {
+        if stk[cap * 3 + stackNum] < cap {
+            stk[cap * stackNum + stk[cap * 3 + stackNum]] = value
+            stk[cap * 3 + stackNum] += 1
+        }
+    }
+
+    func pop(_ stackNum: Int) -> Int {
+        if isEmpty(stackNum) {
+            return -1
+        }
+        stk[cap * 3 + stackNum] -= 1
+        return stk[cap * stackNum + stk[cap * 3 + stackNum]]
+    }
+
+    func peek(_ stackNum: Int) -> Int {
+        if isEmpty(stackNum) {
+            return -1
+        }
+        return stk[cap * stackNum + stk[cap * 3 + stackNum] - 1]
+    }
+
+    func isEmpty(_ stackNum: Int) -> Bool {
+        return stk[cap * 3 + stackNum] == 0
+    }
+}
+
+/**
+ * Your TripleInOne object will be instantiated and called as such:
+ * let obj = TripleInOne(stackSize)
+ * obj.push(stackNum,value)
+ * let param_2 = obj.pop(stackNum)
+ * let param_3 = obj.peek(stackNum)
+ * let param_4 = obj.isEmpty(stackNum)
+ */
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

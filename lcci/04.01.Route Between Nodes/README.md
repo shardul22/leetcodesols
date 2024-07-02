@@ -1,10 +1,19 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/04.01.Route%20Between%20Nodes/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 04.01. 节点间通路](https://leetcode.cn/problems/route-between-nodes-lcci)
 
 [English Version](/lcci/04.01.Route%20Between%20Nodes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
+
 <p>节点间通路。给定有向图，设计一个算法，找出两个节点之间是否存在一条路径。</p>
 
 <p><strong>示例1:</strong></p>
@@ -27,7 +36,11 @@
 	<li>图中可能存在自环和平行边。</li>
 </ol>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：DFS
 
@@ -42,6 +55,8 @@
 时间复杂度 $(n + m)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别是节点数量和边数量。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +77,8 @@ class Solution:
         vis = set()
         return dfs(start)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +115,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -127,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findWhetherExistsPath(n int, graph [][]int, start int, target int) bool {
 	g := make([][]int, n)
@@ -154,6 +175,8 @@ func findWhetherExistsPath(n int, graph [][]int, start int, target int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findWhetherExistsPath(
     n: number,
@@ -180,7 +203,47 @@ function findWhetherExistsPath(
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    private var g: [[Int]]!
+    private var vis: [Bool]!
+    private var target: Int!
+
+    func findWhetherExistsPath(_ n: Int, _ graph: [[Int]], _ start: Int, _ target: Int) -> Bool {
+        vis = [Bool](repeating: false, count: n)
+        g = [[Int]](repeating: [], count: n)
+        self.target = target
+        for e in graph {
+            g[e[0]].append(e[1])
+        }
+        return dfs(start)
+    }
+
+    private func dfs(_ i: Int) -> Bool {
+        if i == target {
+            return true
+        }
+        if vis[i] {
+            return false
+        }
+        vis[i] = true
+        for j in g[i] {
+            if dfs(j) {
+                return true
+            }
+        }
+        return false
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二：BFS
 
@@ -189,6 +252,8 @@ function findWhetherExistsPath(
 时间复杂度 $(n + m)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别是节点数量和边数量。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -210,6 +275,8 @@ class Solution:
                     q.append(j)
         return False
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -240,6 +307,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -269,6 +338,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findWhetherExistsPath(n int, graph [][]int, start int, target int) bool {
 	g := make([][]int, n)
@@ -294,6 +365,8 @@ func findWhetherExistsPath(n int, graph [][]int, start int, target int) bool {
 	return false
 }
 ```
+
+#### TypeScript
 
 ```ts
 function findWhetherExistsPath(
@@ -327,4 +400,6 @@ function findWhetherExistsPath(
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->
